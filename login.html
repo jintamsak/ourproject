@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+    <meta name="google-signin-client_id" content="774838025247-v7vviefn9l2ggo4ioj0slq4bml2gopf7.apps.googleusercontent.com">
+    <script src="http://apis.google.com/js/platform.js" async defer></script>
+    <title>Login</title>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <link href="btn.css" type="text/css" rel="stylesheet">
+  
+</head>
+<body>
+  <script src="/__/firebase/9.1.2/firebase-app-compat.js"></script>
+  <script src="/__/firebase/9.1.2/firebase-auth-compat.js"></script>
+  <!-- <script src="/__/firebase/9.1.2/firebase-firestore-compat.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+  <script src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <div class="btn">
+    <button type = "submit" id = "gologbtn"><img src="/btn_google_signin_dark_normal_web.png"></button>
+  </div>
+
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-analytics.js";
+    import { getAuth,signInWithPopup, GoogleAuthProvider} 
+      from "https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js";
+    // import { signInWithCustomToken } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCfqwwDug5XrA6cr9ZopoVK5IXboRygd78",
+      authDomain: "homepage-5444c.firebaseapp.com",
+      projectId: "homepage-5444c",
+      storageBucket: "homepage-5444c.appspot.com",
+      messagingSenderId: "239576212002",
+      appId: "1:239576212002:web:d9bf826f74d4a018f5607b"
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  // const realdb = firebase.database();
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    // const db = firebase.firestore();
+  
+  $('#gologbtn').click(function(){
+    signInWithPopup(auth, provider).then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      alert("구글 로그인 성공")
+      console.log(user);
+      console.log("로그인 성공")
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+  })
+
+
+</script>
+
+  <a id="kakao-login-btn"></a>
+  <a href="http://developers.kakao.com/logout"></a>
+  <script type='text/javascript'>
+  Kakao.init('ddce287755ead22c3780a5be13dd2666');
+  Kakao.Auth.createLoginButton({
+    container : '#kakao-login-btn',
+    success:function(authObj) {
+      // alert(JSON.stringify(authObj));
+      alert("카카오 로그인 성공")
+      Kakao.API.request({
+      url:'/v2/user/me',
+      success : (res) => {
+        const kakao_account = res.kakao_account;
+        console.log(kakao_account)
+        console.log("로그인 성공")
+      }
+    })
+  },
+  fail:function(error) {
+    alert(JSON.stringify(error));
+      }
+  })
+
+</script>
+
+</body>
+</html>
