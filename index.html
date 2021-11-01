@@ -13,17 +13,17 @@
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
             <div class="container px-5">
-                <a class="navbar-brand" href="#!">물품보관소 알리미</a>
+                <a class="navbar-brand" href="#!" onclick="location.href='index.html'">물품보관소 알리미</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!" onclick="location.href='login.html'">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">물품보관소 알리미란?
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="#!" onclick="location.href='login.html'">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!" onclick="location.href='introduce.html'">물품보관소 알리미란?
                         </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">건의사항</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">개발자정보</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!" onclick="location.href='complain.html'">건의사항</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!" onclick="location.href='made.html'">개발자정보</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,12 +32,13 @@
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
             <div class="row gx-5 gx-lg-5 align-items-left my-5">
-                <div class="col-lg-5"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
+                <div class="col-lg-5">
+                    <a href="#"><img class="img-fluid rounded mb-4 mb-lg-0" src="assets/map.jpg"></a></div>
                 <div class="col-lg-7">
                     <h1 class="font-weight-light">내 주변 물품 보관소는 어디에?</h1>
                     <div class="input-group">
                                 <input class="form-control" type="text" placeholder="주소를 입력해주세요! 예) 강원도 원주시 00동 " aria-label="주소를 입력해주세요! 예) 강원도 원주시 00동" aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                                <button class="btn btn-secondary" id="button-search" type="button">검색</button>
                             </div>
                 </div>
             </div>
@@ -49,7 +50,7 @@
                             <h2 class="card-title">물품보관소 알리미란?</h2>
                             <p class="card-text">물품보관소 알리미의 목적과 만들어진 계기, 다른 홈페이지와의 다른 점을 확인해보세요!</p>
                         </div>
-                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">바로가기</a></div>
+                        <div class="card-footer"><a class="btn btn-secondary btn-sm" href="#!" onclick="location.href='introduce.html'">바로가기</a></div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
@@ -58,7 +59,7 @@
                             <h2 class="card-title">건의사항</h2>
                             <p class="card-text">여러분이 홈페이지를 사용하면서 불편했던 점과 수정이 필요한 부분을 적어주세요!</p>
                         </div>
-                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">바로가기</a></div>
+                        <div class="card-footer"><a class="btn btn-secondary btn-sm" href="#!" onclick="location.href='complain.html'">바로가기</a></div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
@@ -67,13 +68,13 @@
                             <h2 class="card-title">개발자 정보</h2>
                             <p class="card-text">개발자 정보를 확인해보세요!</p>
                         </div>
-                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">바로가기</a></div>
+                        <div class="card-footer"><a class="btn btn-secondary btn-sm" href="#!" onclick="location.href='made.html'">바로가기</a></div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
+        <footer class="py-5 bg-secondary">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Astrafe</p></div>
         </footer>
         <!-- Bootstrap core JS-->
