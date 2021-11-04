@@ -45,7 +45,7 @@
         <script src="js/scripts.js"></script>
         <script src="/__/firebase/9.1.2/firebase-app-compat.js"></script>
         <script src="/__/firebase/9.1.2/firebase-auth-compat.js"></script>
-        <!-- <script src="/__/firebase/9.1.2/firebase-firestore-compat.js"></script> -->
+        <script src="/__/firebase/9.1.2/firebase-firestore-compat.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
       
         <script src="/__/firebase/init.js?useEmulator=true"></script>
@@ -76,7 +76,7 @@
         // const realdb = firebase.database();
           const auth = getAuth();
           const provider = new GoogleAuthProvider();
-          // const db = firebase.firestore();
+          const db = firebase.firestore();
         
         $('#gologbtn').click(function(){
           signInWithPopup(auth, provider).then((result) => {
