@@ -154,7 +154,11 @@
         container : '#kakao-login-btn',
         success:function(authObj) {
           // alert(JSON.stringify(authObj));
-          alert("카카오 로그인 성공")
+          // alert("카카오 로그인 성공")
+          Kakao.Auth.authorize({
+            redirectUri : 'https://festive-elion-0fc691.netlify.app/index.html',
+            redirectUri : 'http://localhost:5500/index.html'
+          });
           Kakao.API.request({
           url:'/v2/user/me',
           success : (res) => {
