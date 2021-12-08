@@ -60,7 +60,6 @@
         <!-- <div class="btn">
           <button type = "submit" id = "gologbtn"><img src="/btn_google_signin_dark_normal_web.png"></button>
         </div> -->
-        <!-- <div class="g-signin2" align="center" data-onsuccess="onSignIn" style="margin:20px;"></div> -->
         <div id="my-signin2" align="center" style="margin:20px;"></div>
         <div>
           <a id="kakao-login-btn"></a>
@@ -109,20 +108,30 @@
     </script>
 
     <script>
-      function onSuccess(googleUser) {
-        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      }
+      // function onSuccess(googleUser) {
+      //   console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+      // }
+      function onSignIn(googleUser) {
+	      var profile = googleUser.getBasicProfile();
+	      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	      console.log('Name: ' + profile.getName());
+	      console.log('Image URL: ' + profile.getImageUrl());
+	      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token : " + id_token);
+	    }
       function onFailure(error) {
         console.log(error);
       }
       function renderButton() {
         gapi.signin2.render('my-signin2', {
           'scope': 'profile email',
-          'width': 240,
-          'height': 50,
+          'width': 220,
+          'height': 45,
           'longtitle': true,
           'theme': 'dark',
-          'onsuccess': onSuccess,
+          'onsuccess': onSignIn,
           'onfailure': onFailure
         });
       }
@@ -157,7 +166,8 @@
           // alert("카카오 로그인 성공")
           Kakao.Auth.authorize({
             redirectUri : 'https://festive-elion-0fc691.netlify.app/index.html',
-            redirectUri : 'http://localhost:5500/index.html'
+            redirectUri : 'http://localhost:5500/index.html',
+            redirectUri : 'https://lovelymin00.netlify.app/index.html'
           });
           Kakao.API.request({
           url:'/v2/user/me',
