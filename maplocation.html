@@ -32,10 +32,145 @@
             </div>
         </nav>
 
-물품보관소 지도 위치가 나와야 할 페이지입니다.
+        <div id="map" style="width:100%;height:350px;"></div>
 
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a147224b320aa685c5cd53fe3ae35b88"></script>
+        <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+            mapOption = { 
+                center: new kakao.maps.LatLng(37.456354, 126.704561), // 지도의 중심좌표
+                level: 9 // 지도의 확대 레벨
+            };
+        
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
          
-
+        // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열 
+        var positions = [
+            {
+                content: '<div>간석오거리역/지하1층</div>', 
+                latlng: new kakao.maps.LatLng(37.467234, 126.706506)
+            },
+            {
+                content: '<div>갈산역/지하1층</div>', 
+                latlng: new kakao.maps.LatLng(37.517030, 126.721574)
+            },
+            {
+                content: '<div>경인교대입구역/지하1층</div>', 
+                latlng: new kakao.maps.LatLng(37.538228, 126.722591)
+            },
+            {
+                content: '<div>계산역/지하2층</div>',
+                latlng: new kakao.maps.LatLng(37.543234, 126.728490)
+            },
+            {
+                content: '<div>계양역/지상1층</div>',
+                latlng: new kakao.maps.LatLng(37.571092, 126.736069)
+            },
+            {
+                content: '<div>국제업무지구역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.400378, 126.630084)
+            },
+            {
+                content: '<div>문학경기장역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.434910, 126.698354)
+            },
+            {
+                content: '<div>박촌역/층</div>',
+                latlng: new kakao.maps.LatLng(37.553506, 126.744968)
+            },
+            {
+                content: '<div>부평역(대한극장)/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.491159, 126.721697)
+            },
+            {
+                content: '<div>부평구청역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.508061, 126.720862)
+            },
+            {
+                content: '<div>부평시장역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.498440, 126.722276)
+            },
+            {
+                content: '<div>선학역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.427002, 126.698952)
+            },
+            {
+                content: '<div>센트럭파크역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.393472, 126.634876)
+            },
+            {
+                content: '<div>예술회관역/지하2층</div>',
+                latlng: new kakao.maps.LatLng(37.449287, 126.701050)
+            },
+            {
+                content: '<div>신역수역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.418113, 126.694047)
+            }
+        ];
+        
+        for (var i = 0; i < positions.length; i ++) {
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: positions[i].latlng // 마커의 위치
+            });
+        
+            // 마커에 표시할 인포윈도우를 생성합니다 
+            var infowindow = new kakao.maps.InfoWindow({
+                content: positions[i].content // 인포윈도우에 표시할 내용
+            });
+        
+            // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록
+            // 이벤트 리스너로는 클로저를 만들어 등록
+            // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록
+            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+        }
+        
+        // 인포윈도우를 표시하는 클로저를 만드는 함수 
+        function makeOverListener(map, marker, infowindow) {
+            return function() {
+                infowindow.open(map, marker);
+            };
+        }
+        
+        // 인포윈도우를 닫는 클로저를 만드는 함수 
+        function makeOutListener(infowindow) {
+            return function() {
+                infowindow.close();
+            };
+        }
+        
+        
+        /*
+        for (var i = 0; i < positions.length; i ++) {
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: positions[i].latlng // 마커의 위치
+            });
+        
+            // 마커에 표시할 인포윈도우를 생성합니다 
+            var infowindow = new kakao.maps.InfoWindow({
+                content: positions[i].content // 인포윈도우에 표시할 내용
+            });
+        
+            // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듬
+            // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됨
+            (function(marker, infowindow) {
+                // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시
+                kakao.maps.event.addListener(marker, 'mouseover', function() {
+                    infowindow.open(map, marker);
+                });
+        
+                // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫음
+                kakao.maps.event.addListener(marker, 'mouseout', function() {
+                    infowindow.close();
+                });
+            })(marker, infowindow);
+        }
+        */
+        </script>
 
         <!-- Footer-->
         <footer class="py-5 bg-secondary">
